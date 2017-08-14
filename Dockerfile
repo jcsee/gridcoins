@@ -5,8 +5,8 @@ ENV DEBIAN_FRONTEND=noninteractive \
 
 RUN apt-get update \
  && apt-get install -y --no-install-recommends \
-      ca-certificates
-      git gcc make curl build-essential libssl-dev libdb-dev libdb++-dev libqrencode-dev libcurl4-openssl-dev libzip-dev libzip4 libboost-all-dev
+      ca-certificates \
+      git gcc make curl build-essential libssl-dev libdb-dev libdb++-dev libqrencode-dev libcurl4-openssl-dev libzip-dev libzip4 libboost-all-dev \
       net-tools \
  && rm -rf /var/lib/apt/lists/*
 
