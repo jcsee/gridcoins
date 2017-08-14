@@ -10,14 +10,14 @@ RUN apt-get update \
       net-tools \
  && rm -rf /var/lib/apt/lists/*
 
-RUN cd /usr/src/
-    git clone https://github.com/gridcoin/Gridcoin-Research
-    cd Gridcoin-Research/src
-    mkdir -p obj/zerocoin && chmod +x leveldb/build_detect_platform
-    make -f makefile.unix clean
-    make -f makefile.unix USE_UPNP=-
-    strip gridcoinresearchd
-    install -m 755 gridcoinresearchd /usr/bin/gridcoinresearchd
+RUN cd /usr/src/ \
+ && git clone https://github.com/gridcoin/Gridcoin-Research \
+ && cd Gridcoin-Research/src \
+ && mkdir -p obj/zerocoin && chmod +x leveldb/build_detect_platform \
+ && make -f makefile.unix clean \
+ && make -f makefile.unix USE_UPNP=- \
+ && strip gridcoinresearchd \
+ && install -m 755 gridcoinresearchd /usr/bin/gridcoinresearchd
 
 RUN useradd --uid 1000 --groups dialout --no-create-home --shell /bin/bash --home-dir $HOME $USERNAME \
         && mkdir $HOME \
