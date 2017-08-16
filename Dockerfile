@@ -1,7 +1,8 @@
 FROM ubuntu:16.04
 ENV DEBIAN_FRONTEND=noninteractive \
     USERNAME=g \
-    HOME=/home/g
+    HOME=/home/g \
+    VERSION=3.5.9.9
 
 RUN apt-get update \
  && apt-get install -y --no-install-recommends \
@@ -11,8 +12,9 @@ RUN apt-get update \
  && rm -rf /var/lib/apt/lists/*
 
 RUN cd /usr/src/ \
- && git clone https://github.com/gridcoin/Gridcoin-Research \
+ && git clone -b $VERSION https://github.com/gridcoin/Gridcoin-Research \
  && cd Gridcoin-Research/src \
+ && grep CLIENT_VERSION clientversion.h \
  && mkdir -p obj/zerocoin && chmod +x leveldb/build_detect_platform \
  && make -f makefile.unix clean \
  && make -f makefile.unix USE_UPNP=- \
