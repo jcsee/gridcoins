@@ -2,7 +2,7 @@ FROM ubuntu:16.04
 ENV DEBIAN_FRONTEND=noninteractive \
     USERNAME=g \
     HOME=/home/g \
-    VERSION=3.6.0.0
+    VERSION=3.6.0.1
 
 RUN apt-get update \
  && apt-get install -y --no-install-recommends \
@@ -19,7 +19,8 @@ RUN cd /usr/src/ \
  && make -f makefile.unix clean \
  && make -f makefile.unix USE_UPNP=- \
  && strip gridcoinresearchd \
- && install -m 755 gridcoinresearchd /usr/bin/gridcoinresearchd
+ && install -m 755 gridcoinresearchd /usr/bin/gridcoinresearchd \
+ && rm -rf /usr/src/Gridcoin-Research
 
 RUN useradd --uid 1000 --groups dialout --no-create-home --shell /bin/bash --home-dir $HOME $USERNAME \
         && mkdir $HOME \
