@@ -13,7 +13,7 @@ RUN apt-get update \
 
 RUN cd /usr/src/ \
  && git clone -b $VERSION https://github.com/gridcoin/Gridcoin-Research \
- && apt-get purge git \
+ && apt-get purge -y git \
  && cd Gridcoin-Research/src \
  && grep CLIENT_VERSION clientversion.h \
  && mkdir -p obj/zerocoin && chmod +x leveldb/build_detect_platform \
