@@ -2,7 +2,7 @@ FROM ubuntu:16.04
 ENV DEBIAN_FRONTEND=noninteractive \
     USERNAME=g \
     HOME=/home/g \
-    VERSION=3.6.0.1
+    VERSION=3.6.0.2
 
 RUN apt-get update \
  && apt-get install -y --no-install-recommends \
@@ -13,6 +13,7 @@ RUN apt-get update \
 
 RUN cd /usr/src/ \
  && git clone -b $VERSION https://github.com/gridcoin/Gridcoin-Research \
+ && apt-get purge git \
  && cd Gridcoin-Research/src \
  && grep CLIENT_VERSION clientversion.h \
  && mkdir -p obj/zerocoin && chmod +x leveldb/build_detect_platform \
