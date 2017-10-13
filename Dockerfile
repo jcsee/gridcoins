@@ -2,7 +2,7 @@ FROM ubuntu:16.04
 ENV DEBIAN_FRONTEND=noninteractive \
     USERNAME=g \
     HOME=/home/g \
-    VERSION=3.6.0.2
+    VERSION=3.6.2.0
 
 RUN apt-get update \
  && apt-get install -y --no-install-recommends \
