@@ -2,12 +2,13 @@ FROM ubuntu:16.04
 ENV DEBIAN_FRONTEND=noninteractive \
     USERNAME=g \
     HOME=/home/g \
-    VERSION=3.7.3.0
+    VERSION=3.7.4.0
 
 RUN apt-get update \
  && apt-get install -y --no-install-recommends \
       ca-certificates \
       git gcc make curl build-essential libssl-dev libdb-dev libdb++-dev libqrencode-dev libcurl4-openssl-dev libzip-dev libzip4 libboost-all-dev \
+      less \
       net-tools \
  && rm -rf /var/lib/apt/lists/*
 
@@ -21,13 +22,14 @@ RUN cd /usr/src/ \
  && make -f makefile.unix USE_UPNP=- \
  && strip gridcoinresearchd \
  && install -m 755 gridcoinresearchd /usr/bin/gridcoinresearchd \
- && rm -rf /usr/src/Gridcoin-Research
+ && rm -rf /usr/src/Gridcoin-Research \
+ && mkdir /var/lib/boinc-client
 
 RUN useradd --uid 1000 --groups dialout --no-create-home --shell /bin/bash --home-dir $HOME $USERNAME \
         && mkdir $HOME \
         && chown -R $USERNAME:$USERNAME $HOME
 
-VOLUME $HOME/.GridcoinResearch/
+VOLUME $HOME/.GridcoinResearch/ /var/lib/boinc-client/
 
 USER $USERNAME
 
